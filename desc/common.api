@@ -1,0 +1,7 @@
+syntax = "v1"
+
+type CommonPagination {
+	Page     uint32 `json:"page,optional,default=1"` // 页码
+	PageSize uint32 `json:"pageSize,optional,default=10"` // 每页数量
+}
+

@@ -1,0 +1,31 @@
+syntax = "v1"
+
+import "common.api"
+
+// ==================== 狗品种 ====================
+type demoListReq {
+	CommonPagination
+}
+
+type DemoListItem {
+	Abbr string `json:"abbr"` // 缩写
+	Name string `json:"name"` // 名称
+}
+
+type demoListRes {
+	Total uint32          `json:"total"` // 总数
+	Items []*DemoListItem `json:"items"`
+}
+
+@server (
+	// jwt: Auth
+	prefix:     v1/demo
+	group:      v1/demo
+	middleware: RequestLogMiddleware,ParameterValidationMiddleware
+)
+service gozero_demo {
+	@doc "列表"
+	@handler list
+	get /list (demoListReq) returns (demoListRes)
+}
+

@@ -1,0 +1,141 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/demo/list": {
+      "get": {
+        "summary": "列表",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demoListRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "description": " 页码",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": "1"
+          },
+          {
+            "name": "pageSize",
+            "description": " 每页数量",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": "10"
+          }
+        ],
+        "tags": [
+          "v1/demo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CommonPagination": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "default": "1",
+          "description": " 页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "default": "10",
+          "description": " 每页数量"
+        }
+      },
+      "title": "CommonPagination"
+    },
+    "DemoListItem": {
+      "type": "object",
+      "properties": {
+        "abbr": {
+          "type": "string",
+          "description": " 缩写"
+        },
+        "name": {
+          "type": "string",
+          "description": " 名称"
+        }
+      },
+      "title": "DemoListItem",
+      "required": [
+        "abbr",
+        "name"
+      ]
+    },
+    "demoListReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "default": "1",
+          "description": " 页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "default": "10",
+          "description": " 每页数量"
+        }
+      },
+      "title": "demoListReq"
+    },
+    "demoListRes": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": " 总数"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DemoListItem"
+          }
+        }
+      },
+      "title": "demoListRes",
+      "required": [
+        "total",
+        "items"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

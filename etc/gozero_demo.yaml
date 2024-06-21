@@ -1,0 +1,20 @@
+Name: gozero_demo
+Host: 0.0.0.0
+Port: 8089
+
+Mysql:
+  DataSource:  root:xxxxxx@tcp(127.0.0.1:3306)/gozero_demo?charset=utf8mb4&parseTime=true
+  OutPath: internal/dal/query
+  ModelPkgPath: internal/dal/model
+
+Auth:
+  AccessSecret: xxxxx
+  AccessExpire: 604800 # 7*24*3600
+
+Log:
+  Mode: file
+  KeepDays: 900
+  Path: logs
+  Compress: true
+  Encoding: json
+  TimeFormat: 2006-01-02 15:04:05
