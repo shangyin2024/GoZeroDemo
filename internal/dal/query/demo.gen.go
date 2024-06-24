@@ -28,8 +28,8 @@ func newDemo(db *gorm.DB, opts ...gen.DOOption) demo {
 	tableName := _demo.demoDo.TableName()
 	_demo.ALL = field.NewAsterisk(tableName)
 	_demo.ID = field.NewString(tableName, "id")
-	_demo.CreatedAt = field.NewUint32(tableName, "created_at")
-	_demo.UpdatedAt = field.NewUint32(tableName, "updated_at")
+	_demo.CreatedAt = field.NewTime(tableName, "created_at")
+	_demo.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_demo.DeletedAt = field.NewField(tableName, "deleted_at")
 	_demo.Name = field.NewString(tableName, "name")
 	_demo.Sex = field.NewUint8(tableName, "sex")
@@ -50,8 +50,8 @@ type demo struct {
 
 	ALL         field.Asterisk
 	ID          field.String
-	CreatedAt   field.Uint32
-	UpdatedAt   field.Uint32
+	CreatedAt   field.Time
+	UpdatedAt   field.Time
 	DeletedAt   field.Field
 	Name        field.String // name
 	Sex         field.Uint8  // 性别 1男 2女 3保密
@@ -77,8 +77,8 @@ func (d demo) As(alias string) *demo {
 func (d *demo) updateTableName(table string) *demo {
 	d.ALL = field.NewAsterisk(table)
 	d.ID = field.NewString(table, "id")
-	d.CreatedAt = field.NewUint32(table, "created_at")
-	d.UpdatedAt = field.NewUint32(table, "updated_at")
+	d.CreatedAt = field.NewTime(table, "created_at")
+	d.UpdatedAt = field.NewTime(table, "updated_at")
 	d.DeletedAt = field.NewField(table, "deleted_at")
 	d.Name = field.NewString(table, "name")
 	d.Sex = field.NewUint8(table, "sex")

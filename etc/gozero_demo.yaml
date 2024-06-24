@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 8089
 
 Mysql:
-  DataSource:  root:xxxxxx@tcp(127.0.0.1:3306)/gozero_demo?charset=utf8mb4&parseTime=true
+  DataSource:  root:Aa@123456@tcp(127.0.0.1:3306)/gozero_demo?charset=utf8mb4&parseTime=true
   OutPath: internal/dal/query
   ModelPkgPath: internal/dal/model
 

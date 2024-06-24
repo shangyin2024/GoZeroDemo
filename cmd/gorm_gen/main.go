@@ -92,13 +92,10 @@ func main() {
 	// 数据类型映射
 	g.WithDataTypeMap(dataMap)
 
-	g.WithImportPkgPath("gorm.io/plugin/soft_delete")
-
 	// 生成模型
 	g.ApplyBasic(
 		g.GenerateAllTable(
 			gen.WithMethod(common.Method{}),
-			gen.FieldType("deleted_at", "soft_delete.DeletedAt"),
 		)...,
 	)
 

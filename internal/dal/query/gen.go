@@ -16,34 +16,39 @@ import (
 )
 
 var (
-	Q    = new(Query)
-	Demo *demo
+	Q       = new(Query)
+	Demo    *demo
+	DemoExt *demoExt
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	Demo = &Q.Demo
+	DemoExt = &Q.DemoExt
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:   db,
-		Demo: newDemo(db, opts...),
+		db:      db,
+		Demo:    newDemo(db, opts...),
+		DemoExt: newDemoExt(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Demo demo
+	Demo    demo
+	DemoExt demoExt
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		Demo: q.Demo.clone(db),
+		db:      db,
+		Demo:    q.Demo.clone(db),
+		DemoExt: q.DemoExt.clone(db),
 	}
 }
 
@@ -57,18 +62,21 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:   db,
-		Demo: q.Demo.replaceDB(db),
+		db:      db,
+		Demo:    q.Demo.replaceDB(db),
+		DemoExt: q.DemoExt.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Demo IDemoDo
+	Demo    IDemoDo
+	DemoExt IDemoExtDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Demo: q.Demo.WithContext(ctx),
+		Demo:    q.Demo.WithContext(ctx),
+		DemoExt: q.DemoExt.WithContext(ctx),
 	}
 }
 

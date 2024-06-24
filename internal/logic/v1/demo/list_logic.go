@@ -24,6 +24,11 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 
 func (l *ListLogic) List(req *types.DemoListReq) (resp *types.DemoListRes, err error) {
 	demoModel := l.svcCtx.DBQuery.Demo
-	_, _ = demoModel.WithContext(l.ctx).Where(demoModel.ID.Eq("aaa")).Order(demoModel.Phone.Desc()).Take()
+	demoExtModel := l.svcCtx.DBQuery.DemoExt
+	_, _ = demoModel.WithContext(l.ctx).
+		LeftJoin(demoExtModel, demoExtModel.DemoID.EqCol(demoModel.ID), demoExtModel.DeletedAt.IsNull()).
+		Where(demoModel.ID.Eq("aaa")).
+		Order(demoModel.Phone.Desc()).
+		Take()
 	return
 }
