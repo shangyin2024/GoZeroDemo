@@ -32,19 +32,18 @@ func (m *RequestLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			if err != nil {
 				fmt.Println(err)
 			}
-			// logx.WithContext(r.Context()).Infof("req: %v", string(bodyBytes))
 			r.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 		}
 
 		// 创建一个自定义的 ResponseWriter，用于记录响应
-		// recorder := &responseRecorder{
-		// 	ResponseWriter: w,
-		// 	statusCode:     http.StatusOK,
-		// 	body:           make([]byte, 0),
-		// }
-		// next(recorder, r)
+		recorder := &responseRecorder{
+			ResponseWriter: w,
+			statusCode:     http.StatusOK,
+			body:           make([]byte, 0),
+		}
+		next(recorder, r)
 
-		// responseBoy := string(recorder.body)
+		responseBoy := string(recorder.body)
 
 		t := time.Since(startTime).Seconds()
 
@@ -54,11 +53,9 @@ func (m *RequestLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			"method:", method,
 			"query:", r.URL.Query().Encode(),
 			"body", string(bodyBytes),
+			"response:", responseBoy,
 			"latency:", fmt.Sprintf("%.3f", t),
 		)
-
-		// Passthrough to next handler if need
-		next(w, r)
 	}
 }
 

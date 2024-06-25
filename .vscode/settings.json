@@ -9,6 +9,7 @@
         "gorm",
         "gormx",
         "gozero_demo",
+        "httpx",
         "keccak",
         "logx",
         "mediumint",
