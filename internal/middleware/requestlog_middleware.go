@@ -26,6 +26,7 @@ func (m *RequestLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		method := r.Method
 
 		var bodyBytes []byte
+		var err error
 		if slices.Contains([]string{"GET", "POST", "PUT", "DELETE"}, method) {
 			bodyBytes, err = io.ReadAll(r.Body)
 			if err != nil {
