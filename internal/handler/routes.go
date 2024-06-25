@@ -16,10 +16,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.RequestLogMiddleware, serverCtx.ParameterValidationMiddleware},
 			[]rest.Route{
 				{
+					// 新增
+					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: v1demo.AddHandler(serverCtx),
+				},
+				{
+					// 删除
+					Method:  http.MethodDelete,
+					Path:    "/del",
+					Handler: v1demo.DelHandler(serverCtx),
+				},
+				{
 					// 列表
 					Method:  http.MethodGet,
 					Path:    "/list",
 					Handler: v1demo.ListHandler(serverCtx),
+				},
+				{
+					// 修改
+					Method:  http.MethodPut,
+					Path:    "/update",
+					Handler: v1demo.UpdateHandler(serverCtx),
 				},
 			}...,
 		),

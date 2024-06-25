@@ -37,7 +37,6 @@ func newDemo(db *gorm.DB, opts ...gen.DOOption) demo {
 	_demo.Avatar = field.NewString(tableName, "avatar")
 	_demo.Email = field.NewString(tableName, "email")
 	_demo.Phone = field.NewString(tableName, "phone")
-	_demo.Extra = field.NewBytes(tableName, "extra")
 
 	_demo.fillFieldMap()
 
@@ -59,7 +58,6 @@ type demo struct {
 	Avatar      field.String // 头像
 	Email       field.String // email
 	Phone       field.String // 手机号
-	Extra       field.Bytes  // 扩展字段
 
 	fieldMap map[string]field.Expr
 }
@@ -86,7 +84,6 @@ func (d *demo) updateTableName(table string) *demo {
 	d.Avatar = field.NewString(table, "avatar")
 	d.Email = field.NewString(table, "email")
 	d.Phone = field.NewString(table, "phone")
-	d.Extra = field.NewBytes(table, "extra")
 
 	d.fillFieldMap()
 
@@ -103,7 +100,7 @@ func (d *demo) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (d *demo) fillFieldMap() {
-	d.fieldMap = make(map[string]field.Expr, 11)
+	d.fieldMap = make(map[string]field.Expr, 10)
 	d.fieldMap["id"] = d.ID
 	d.fieldMap["created_at"] = d.CreatedAt
 	d.fieldMap["updated_at"] = d.UpdatedAt
@@ -114,7 +111,6 @@ func (d *demo) fillFieldMap() {
 	d.fieldMap["avatar"] = d.Avatar
 	d.fieldMap["email"] = d.Email
 	d.fieldMap["phone"] = d.Phone
-	d.fieldMap["extra"] = d.Extra
 }
 
 func (d demo) clone(db *gorm.DB) demo {

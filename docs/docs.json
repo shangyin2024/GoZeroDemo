@@ -15,6 +15,62 @@
     "application/json"
   ],
   "paths": {
+    "/v1/demo/add": {
+      "post": {
+        "summary": "新增",
+        "operationId": "add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demoAddRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " ==================== 新增测试数据 ====================",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demoAddReq"
+            }
+          }
+        ],
+        "tags": [
+          "v1/demo"
+        ]
+      }
+    },
+    "/v1/demo/del": {
+      "delete": {
+        "summary": "删除",
+        "operationId": "del",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demoDelRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " ==================== 删除测试数据 ====================",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demoDelReq"
+            }
+          }
+        ],
+        "tags": [
+          "v1/demo"
+        ]
+      }
+    },
     "/v1/demo/list": {
       "get": {
         "summary": "列表",
@@ -45,6 +101,44 @@
             "type": "integer",
             "format": "int32",
             "default": "10"
+          },
+          {
+            "name": "name",
+            "description": " name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "v1/demo"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ]
+      }
+    },
+    "/v1/demo/update": {
+      "put": {
+        "summary": "修改",
+        "operationId": "update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/demoUpdateRes"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " ==================== 修改测试数据 ====================",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/demoUpdateReq"
+            }
           }
         ],
         "tags": [
@@ -75,20 +169,112 @@
     "DemoListItem": {
       "type": "object",
       "properties": {
-        "abbr": {
-          "type": "string",
-          "description": " 缩写"
+        "id": {
+          "type": "string"
         },
         "name": {
           "type": "string",
-          "description": " 名称"
+          "description": " name"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "uint8",
+          "description": " 性别 1男 2女 3保密"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": " 生日"
+        },
+        "avatar": {
+          "type": "string",
+          "description": " 头像"
+        },
+        "email": {
+          "type": "string",
+          "description": " email"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
         }
       },
       "title": "DemoListItem",
       "required": [
-        "abbr",
-        "name"
+        "id",
+        "name",
+        "sex",
+        "date_of_birth",
+        "avatar",
+        "email",
+        "phone"
       ]
+    },
+    "demoAddReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": " name"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "uint8",
+          "description": " 性别 1男 2女 3保密"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "description": " 生日"
+        },
+        "avatar": {
+          "type": "string",
+          "description": " 头像"
+        },
+        "email": {
+          "type": "string",
+          "description": " email"
+        },
+        "phone": {
+          "type": "string",
+          "description": " 手机号"
+        }
+      },
+      "title": "demoAddReq",
+      "required": [
+        "name",
+        "sex",
+        "date_of_birth",
+        "avatar",
+        "email",
+        "phone"
+      ]
+    },
+    "demoAddRes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "demoAddRes",
+      "required": [
+        "id"
+      ]
+    },
+    "demoDelReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "demoDelReq",
+      "required": [
+        "id"
+      ]
+    },
+    "demoDelRes": {
+      "type": "object",
+      "title": "demoDelRes"
     },
     "demoListReq": {
       "type": "object",
@@ -104,6 +290,10 @@
           "format": "int32",
           "default": "10",
           "description": " 每页数量"
+        },
+        "name": {
+          "type": "string",
+          "description": " name"
         }
       },
       "title": "demoListReq"
@@ -128,6 +318,26 @@
         "total",
         "items"
       ]
+    },
+    "demoUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "demoUpdateReq",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "demoUpdateRes": {
+      "type": "object",
+      "title": "demoUpdateRes"
     }
   },
   "securityDefinitions": {

@@ -95,6 +95,10 @@ func main() {
 	// 生成模型
 	g.ApplyBasic(
 		g.GenerateAllTable(
+			// gen.FieldNew("gorm.Model", "gorm.Model", gen.FieldTag),
+
+			// gen.FieldIgnore("id", "created_at", "updated_at", "deleted_at"),
+
 			gen.WithMethod(common.Method{}),
 		)...,
 	)

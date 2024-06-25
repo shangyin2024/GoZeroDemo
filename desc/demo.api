@@ -5,17 +5,52 @@ import "common.api"
 // ==================== 狗品种 ====================
 type demoListReq {
 	CommonPagination
+	Name string `form:"name,optional"` // name
 }
 
 type DemoListItem {
-	Abbr string `json:"abbr"` // 缩写
-	Name string `json:"name"` // 名称
+	ID          string `json:"id"`
+	Name        string `json:"name"` // name
+	Sex         uint8  `json:"sex"` // 性别 1男 2女 3保密
+	DateOfBirth string `json:"date_of_birth"` // 生日
+	Avatar      string `json:"avatar"` // 头像
+	Email       string `json:"email"` // email
+	Phone       string `json:"phone"` // 手机号
 }
 
 type demoListRes {
 	Total uint32          `json:"total"` // 总数
 	Items []*DemoListItem `json:"items"`
 }
+
+// ==================== 新增测试数据 ====================
+type demoAddReq {
+	Name        string `json:"name"` // name
+	Sex         uint8  `json:"sex"` // 性别 1男 2女 3保密
+	DateOfBirth string `json:"date_of_birth"` // 生日
+	Avatar      string `json:"avatar"` // 头像
+	Email       string `json:"email"` // email
+	Phone       string `json:"phone"` // 手机号
+}
+
+type demoAddRes {
+	ID string `json:"id"`
+}
+
+// ==================== 删除测试数据 ====================
+type demoDelReq {
+	ID string `json:"id"`
+}
+
+type demoDelRes {}
+
+// ==================== 修改测试数据 ====================
+type demoUpdateReq {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type demoUpdateRes {}
 
 @server (
 	// jwt: Auth
@@ -27,5 +62,17 @@ service gozero_demo {
 	@doc "列表"
 	@handler list
 	get /list (demoListReq) returns (demoListRes)
+
+	@doc "新增"
+	@handler add
+	post /add (demoAddReq) returns (demoAddRes)
+
+	@doc "删除"
+	@handler del
+	delete /del (demoDelReq) returns (demoDelRes)
+
+	@doc "修改"
+	@handler update
+	put /update (demoUpdateReq) returns (demoUpdateRes)
 }
 

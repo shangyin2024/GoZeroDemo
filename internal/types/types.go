@@ -7,15 +7,49 @@ type CommonPagination struct {
 }
 
 type DemoListItem struct {
-	Abbr string `json:"abbr"` // 缩写
-	Name string `json:"name"` // 名称
+	ID          string `json:"id"`
+	Name        string `json:"name"`          // name
+	Sex         uint8  `json:"sex"`           // 性别 1男 2女 3保密
+	DateOfBirth string `json:"date_of_birth"` // 生日
+	Avatar      string `json:"avatar"`        // 头像
+	Email       string `json:"email"`         // email
+	Phone       string `json:"phone"`         // 手机号
+}
+
+type DemoAddReq struct {
+	Name        string `json:"name"`          // name
+	Sex         uint8  `json:"sex"`           // 性别 1男 2女 3保密
+	DateOfBirth string `json:"date_of_birth"` // 生日
+	Avatar      string `json:"avatar"`        // 头像
+	Email       string `json:"email"`         // email
+	Phone       string `json:"phone"`         // 手机号
+}
+
+type DemoAddRes struct {
+	ID string `json:"id"`
+}
+
+type DemoDelReq struct {
+	ID string `json:"id"`
+}
+
+type DemoDelRes struct {
 }
 
 type DemoListReq struct {
 	CommonPagination
+	Name string `form:"name,optional"` // name
 }
 
 type DemoListRes struct {
 	Total uint32          `json:"total"` // 总数
 	Items []*DemoListItem `json:"items"`
+}
+
+type DemoUpdateReq struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type DemoUpdateRes struct {
 }

@@ -2,9 +2,10 @@ package middleware
 
 import (
 	"errors"
-	xhttp "github.com/zeromicro/x/http"
 	"net/http"
 	"strconv"
+
+	xhttp "github.com/zeromicro/x/http"
 )
 
 type ParameterValidationMiddleware struct {
@@ -14,6 +15,7 @@ func NewParameterValidationMiddleware() *ParameterValidationMiddleware {
 	return &ParameterValidationMiddleware{}
 }
 
+// Handle parameter validation middleware
 func (m *ParameterValidationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		values := r.URL.Query()

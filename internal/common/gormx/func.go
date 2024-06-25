@@ -2,6 +2,7 @@ package gormx
 
 import (
 	"errors"
+
 	"gorm.io/gen"
 	"gorm.io/gorm"
 )
@@ -18,7 +19,7 @@ func CheckError(e error) (exists bool, err error) {
 }
 
 // Paginate 数据分页
-func Paginate(page, pageSize int64) func(gen.Dao) gen.Dao {
+func Paginate(page, pageSize uint32) func(gen.Dao) gen.Dao {
 
 	return func(dao gen.Dao) gen.Dao {
 		if page == 0 {

@@ -1,11 +1,17 @@
 Name: gozero_demo
 Host: 0.0.0.0
 Port: 8089
+Mode: dev
 
 Mysql:
   DataSource:  root:Aa@123456@tcp(127.0.0.1:3306)/gozero_demo?charset=utf8mb4&parseTime=true
   OutPath: internal/dal/query
   ModelPkgPath: internal/dal/model
+
+Redis:
+  Addr: 127.0.0.1:6379
+  Password:
+  DB: 0
 
 Auth:
   AccessSecret: xxxxx
@@ -18,3 +24,16 @@ Log:
   Compress: true
   Encoding: json
   TimeFormat: 2006-01-02 15:04:05
+  Stat: false
+
+Telemetry:
+  Name: GoZeroDemo
+  Endpoint: http://localhost:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+
+DevServer:
+  Enabled: true
+  Port: 6470
+  MetricsPath: /metrics
+  EnableMetrics: true
